@@ -132,22 +132,6 @@ function InteractivityLesson() {
 
 	return (
 		<div>
-			<div
-				style={{
-					backgroundColor: "#e74c3c",
-					color: "white",
-					padding: "20px",
-					borderRadius: "10px",
-					marginBottom: "30px",
-					textAlign: "center",
-				}}
-			>
-				<h1>Days 3-4: State & Interactivity</h1>
-				<p>
-					Learn to make your React components come alive with state and events!
-				</p>
-			</div>
-
 			{/* NEW: Add this counter section */}
 			<div
 				style={{
@@ -246,22 +230,6 @@ function InteractivityLesson() {
 
 	return (
 		<div>
-			<div
-				style={{
-					backgroundColor: "#e74c3c",
-					color: "white",
-					padding: "20px",
-					borderRadius: "10px",
-					marginBottom: "30px",
-					textAlign: "center",
-				}}
-			>
-				<h1>Days 3-4: State & Interactivity</h1>
-				<p>
-					Learn to make your React components come alive with state and events!
-				</p>
-			</div>
-
 			{/* Your counter from the previous section */}
 			{/* ... counter code ... */}
 
