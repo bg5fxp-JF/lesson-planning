@@ -689,6 +689,14 @@ Before moving on, make sure you can answer these:
 
 ## What's Next?
 
-In Days 3-4, we'll create more lesson pages and introduce TypeScript! You'll learn how to add new routes to your Learning Hub, create components from scratch, and how TypeScript makes development safer and more enjoyable.
+In Days 3-4, we'll dive into **React State & Interactivity**! You'll learn how to make your components come alive by adding:
+
+- **Interactive counters** that respond to button clicks
+- **Show/hide sections** that toggle content visibility  
+- **Dynamic lists** where you can add new items
+- **Event handling** to respond to user actions
+- **Conditional rendering** to show different content based on state
+
+You'll add a new lesson page to your existing React Learning Hub and build these interactive features step by step. By the end, your static components will become truly dynamic!
 
 Remember: Every expert was once a beginner. You're doing great! 🌟
