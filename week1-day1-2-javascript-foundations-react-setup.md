@@ -275,21 +275,21 @@ const person = { name: "Sarah", age: 28 }
 
 If you haven't done these yet, please complete them first!
 
-### Create Your React Project
+### Get Your React Learning Hub Project
 
-Now let's create your React Learning Hub project:
+We've prepared a starter React project for you! Let's clone it to your computer:
 
 ```bash
-# Create a new React project (this takes a minute)
-pnpm create vite@latest my-dch-react-learning-hub --template react
+# Clone the React Learning Hub starter project
+git clone https://github.com/bg5fxp-JF/my-dch-react-learning-hub.git
 
 # Go into the project folder
 cd my-dch-react-learning-hub
 
-# opens project in VS Code
+# Opens project in VS Code
 code .
 
-# Download all the tools we need (this also takes a minute)
+# Download all the tools we need (this takes a minute)
 pnpm install
 
 # Start your development server
@@ -298,25 +298,28 @@ pnpm dev
 
 **🎉 Success!** Open your browser and go to http://localhost:5173
 
-You should see a page with a spinning React logo. **This is your React Learning Hub running on your computer!**
+You should see your React Learning Hub with a navigation bar and dashboard page. **This is your React Learning Hub running on your computer!**
 
-### Initialize Git for Your Project
+### Initialize Your Own Git Repository
 
-Since we'll be committing and pushing changes throughout our learning journey, let's set up Git for this project:
+Now let's set up your own Git repository to track your learning journey:
 
 ```bash
 # Stop the development server first (Ctrl+C in terminal)
-# Then initialize git
+# Remove the existing git history (from the cloned repo)
+rm -rf .git
+
+# Initialize your own fresh git repository
 git init
 
 # Add all files to git
 git add .
 
 # Make your first commit
-git commit -m "Initial React Learning Hub setup"
+git commit -m "Initial React Learning Hub setup - starting my journey!"
 ```
 
-**What just happened?** We created a Git repository for your project so you can track all the changes you make as you learn!
+**What just happened?** You now have your own Git repository for tracking all the changes you'll make as you learn! The starter code is now yours to modify and experiment with.
 
 In VS Code You should see a file tree on the left side. This is your Learning Hub project!
 
@@ -325,63 +328,71 @@ In VS Code You should see a file tree on the left side. This is your Learning Hu
 ```
 my-dch-react-learning-hub/
 ├── src/
-│   ├── App.jsx         ← This is where we'll build your hub
-│   └── main.jsx        ← This starts everything (don't touch)
-├── index.html          ← The basic HTML page
-└── package.json        ← Project settings (don't touch)
+│   ├── App.jsx              ← Main app with routing already set up
+│   ├── main.jsx             ← This starts everything (don't touch)
+│   ├── pages/               ← Your lesson pages go here
+│   │   ├── Dashboard.jsx    ← Your learning hub homepage
+│   │   └── week1/           ← Week 1 lessons
+│   └── components/          ← Reusable UI components
+│       └── default/         ← Navigation and cards
+├── index.html               ← The basic HTML page
+└── package.json             ← Project settings
 ```
 
-**The only file we care about right now is `App.jsx` - this is where you'll build your learning journey!**
+**The starter project includes:**
+- React Router for navigation between pages
+- A Dashboard component as your homepage
+- Pre-built navigation and lesson card components
+- Organized folder structure for your learning journey
 
 ---
 
-## Part 3: Building Your Learning Hub Homepage (1.5 hours)
+## Part 3: Building Your First Component Lesson (1.5 hours)
 
 ### Step 1: Understanding What We're Looking At
 
-Open `src/App.jsx` in VS Code. You'll see something like this:
+Your project already has navigation set up! Let's explore:
+
+1. **Open your browser** at http://localhost:5173 - You'll see the Dashboard with lesson cards
+2. **Click on "React Components"** card - This takes you to your first lesson page!
+
+Open `src/App.jsx` to see how routing works:
 
 ```jsx
 function App() {
 	return (
-		<div>
-			<h1>Vite + React</h1>
-			{/* ... other code ... */}
-		</div>
+		<Router>
+			<div>
+				<Navigation />  {/* Navigation bar at the top */}
+				<Routes>
+					<Route path="/" element={<Dashboard />} />  {/* Hub for all lessons */}
+					<Route path="/week1/components" element={<ComponentsLesson />} />  {/* Your first lesson! */}
+				</Routes>
+			</div>
+		</Router>
 	);
 }
 ```
 
-**What is this?** This is a React component - think of it as a custom HTML tag that we create ourselves!
+**What is this?** 
+- `Dashboard` = Your hub for navigating between all lessons
+- `ComponentsLesson` = Where you'll write your first React code!
+- The navigation happens automatically when you click lesson cards
 
-Let's clear it out and start fresh:
+### Step 2: Working on Your First Lesson Page
 
-```jsx
-// src/App.jsx - Replace everything with this
-function App() {
-	return (
-		<div>
-			<h1>Hello World!</h1>
-		</div>
-	);
-}
+Open `src/pages/week1/ComponentsLesson.jsx` - THIS is where we'll build today!
 
-export default App;
-```
-
-**Save the file and check your browser - you should see "Hello World!"**
-
-### Step 2: Adding Your Name (Understanding Variables in JSX)
-
-Let's make it personal by adding your name:
+You'll see it already has some starter code. Let's modify it to add your personal information:
 
 ```jsx
-function App() {
+// src/pages/week1/ComponentsLesson.jsx
+function ComponentsLesson() {
 	const myName = "Sarah"; // Put YOUR name here!
 
 	return (
 		<div>
-			<h1>Hello World!</h1>
+			<h1>Learning React Components</h1>
 			<p>My name is {myName}</p>
 		</div>
 	);
@@ -396,35 +407,36 @@ function App() {
 
 ### Step 3: Adding More Information
 
-Let's add more information about yourself:
+Let's expand the ComponentsLesson with more information about yourself:
 
 ```jsx
-function App() {
+function ComponentsLesson() {
 	const myName = "Sarah";
 	const myAge = 25;
 	const myCity = "Boston";
 
 	return (
 		<div>
-			<h1>Welcome to My React Learning Hub!</h1>
+			<h1>Learning React Components</h1>
+			<h2>About Me</h2>
 			<p>Hi! My name is {myName}.</p>
 			<p>
 				I'm {myAge} years old and I live in {myCity}.
 			</p>
-			<p>I'm learning React!</p>
+			<p>I'm learning React components!</p>
 		</div>
 	);
 }
 ```
 
-**Try it:** Change the values to match your real information and see the website update!
+**Try it:** Change the values to match your real information and see the page update!
 
 ### Step 4: Adding a List of Hobbies (Understanding Arrays)
 
 Now let's add your hobbies using what we learned about arrays:
 
 ```jsx
-function App() {
+function ComponentsLesson() {
 	const myName = "Sarah";
 	const myAge = 25;
 	const myCity = "Boston";
@@ -432,17 +444,18 @@ function App() {
 
 	return (
 		<div>
-			<h1>Welcome to My React Learning Hub!</h1>
+			<h1>Learning React Components</h1>
+			<h2>About Me</h2>
 			<p>Hi! My name is {myName}.</p>
 			<p>
 				I'm {myAge} years old and I live in {myCity}.
 			</p>
-			<p>I'm learning React!</p>
+			<p>I'm learning React components!</p>
 
 			<h2>My Hobbies:</h2>
 			<ul>
 				{myHobbies.map((hobby) => (
-					<li>{hobby}</li>
+					<li key={hobby}>{hobby}</li>
 				))}
 			</ul>
 		</div>
@@ -461,7 +474,7 @@ function App() {
 Let's add some styling to make it look more professional:
 
 ```jsx
-function App() {
+function ComponentsLesson() {
 	const myName = "Sarah";
 	const myAge = 25;
 	const myCity = "Boston";
@@ -487,7 +500,7 @@ function App() {
 				}}
 			>
 				<h1 style={{ color: "#2c3e50", marginBottom: "10px" }}>
-					Welcome to My React Learning Hub!
+					Learning React Components
 				</h1>
 				<p style={{ fontSize: "18px", color: "#34495e" }}>
 					Hi! My name is {myName}.
@@ -543,20 +556,22 @@ function App() {
 	);
 }
 
-export default App;
+export default ComponentsLesson;
 ```
 
-**Congratulations! You just built your React Learning Hub homepage!** 🎉
+**Congratulations! You just built your first React component lesson!** 🎉
+
+**Navigation tip:** Click the logo or "Home" in the navigation to go back to your Dashboard!
 
 ---
 
-## 📝 Your Challenge: Customize Your Learning Hub! (30 minutes)
+## 📝 Your Challenge: Customize Your Component Lesson! (30 minutes)
 
-Now it's your turn to make this Learning Hub truly yours. Here's what to do:
+Now it's your turn to make this component lesson truly yours. Here's what to do:
 
 ### Your Task:
 
-Modify the code to include YOUR real information:
+Modify the ComponentsLesson.jsx to include YOUR real information:
 
 1. **Change the personal details** to match you
 2. **Add/remove hobbies** that you actually enjoy
@@ -622,7 +637,7 @@ Try changing `#f0f8ff` to a different color like:
 
 ### Drill 1: Add More Information (10 minutes)
 
-**Your Task:** Add a new variable called `myJob` (or `mySchool`) to your Learning Hub and display it.
+**Your Task:** Add a new variable called `myJob` (or `mySchool`) to your ComponentsLesson and display it.
 
 **Hint:**
 
@@ -674,6 +689,6 @@ Before moving on, make sure you can answer these:
 
 ## What's Next?
 
-In Days 3-4, we'll add navigation to your Learning Hub and introduce TypeScript! You'll learn how to create different pages for each lesson and how TypeScript makes development safer and more enjoyable.
+In Days 3-4, we'll create more lesson pages and introduce TypeScript! You'll learn how to add new routes to your Learning Hub, create components from scratch, and how TypeScript makes development safer and more enjoyable.
 
 Remember: Every expert was once a beginner. You're doing great! 🌟
