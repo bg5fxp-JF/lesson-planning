@@ -1,10 +1,10 @@
-# Week 1, Day 3-4: React State & Interactivity
+# React State & Interactivity
 
-Welcome to your first dive into interactive React! Up until now, your React Learning Hub has been static - it shows the same information every time. Today, we're going to bring it to life by learning how to make components respond to user actions and change over time.
+Welcome to your first dive into interactive React! Up until now, your React Learning Hub has been static - it shows the same information every time. Now, we're going to bring it to life by learning how to make components respond to user actions and change over time.
 
 ## 🎯 What You'll Actually Build
 
-By the end of Day 4, you'll have added to your React Learning Hub:
+By the end of this lesson, you'll have added to your React Learning Hub:
 
 - **Interactive counter** that responds to button clicks
 - **Show/hide sections** that toggle content visibility
@@ -15,15 +15,15 @@ All of this will be built into your existing `my-dch-react-learning-hub` project
 
 ## 📚 What You Need to Know Before Starting
 
-- You should have completed Days 1-2 and have your React Learning Hub running
-- Basic understanding of variables, arrays, and functions from Day 1
+- You should have completed the previous lesson and have your React Learning Hub running
+- Basic understanding of variables, arrays, and functions from the previous lesson
 - Your React project should be working at http://localhost:5173
 
 ---
 
 ## Part 1: Setting Up Your New Lesson Page (15 minutes)
 
-Great news! Your React Learning Hub from Days 1-2 already has the routing and navigation system set up. Now we just need to add today's lesson to the existing structure.
+Great news! Your React Learning Hub from the previous lesson already has the routing and navigation system set up. Now we just need to add this lesson to the existing structure.
 
 ### Step 1: Add the New Lesson to Your Constants
 
@@ -35,22 +35,24 @@ export const lessons = [
 	{
 		id: 1,
 		title: "React Components & JSX",
-		path: "/week1/components",
+		path: "/fundamentals/components",
+		category: "React Fundamentals",
 	},
 	{
 		id: 2,
 		title: "State & Interactivity", // Add this new lesson
-		path: "/week1/interactivity",
+		path: "/fundamentals/interactivity",
+		category: "React Fundamentals",
 	},
 ];
 ```
 
 ### Step 2: Create Your InteractivityLesson Component
 
-Create a new file: `src/pages/week1/InteractivityLesson.jsx`
+Create a new file: `src/pages/fundamentals/InteractivityLesson.jsx`
 
 ```jsx
-// src/pages/week1/InteractivityLesson.jsx
+// src/pages/fundamentals/InteractivityLesson.jsx
 
 function InteractivityLesson() {
 	return <div></div>;
@@ -65,13 +67,13 @@ Update your `src/App.jsx` to include the new route. Add the import and route:
 
 ```jsx
 // src/App.jsx - Add the import
-import InteractivityLesson from "./pages/week1/InteractivityLesson";
+import InteractivityLesson from "./pages/fundamentals/InteractivityLesson";
 
 // Then add the new route inside your Routes component:
-<Route path="/week1/interactivity" element={<InteractivityLesson />} />;
+<Route path="/fundamentals/interactivity" element={<InteractivityLesson />} />;
 ```
 
-**That's it!** Your React Learning Hub now has a dedicated page for today's interactivity lesson. Visit `/week1/interactivity` to see it!
+**That's it!** Your React Learning Hub now has a dedicated page for this interactivity lesson. Visit `/fundamentals/interactivity` to see it!
 
 ---
 
@@ -79,11 +81,11 @@ import InteractivityLesson from "./pages/week1/InteractivityLesson";
 
 ## Part 2: Understanding State - Why Static Isn't Enough (30 minutes)
 
-Now that we have our new lesson page set up, let's learn about state! Navigate to your Interactivity lesson page (/week1/interactivity) and we'll build everything there.
+Now that we have our new lesson page set up, let's learn about state! Navigate to your Interactivity lesson page (/fundamentals/interactivity) and we'll build everything there.
 
 ### The Problem with Static Components
 
-Open your Components lesson page (/week1/components) and notice that no matter what you do, the information never changes. This is because we're using **variables** that are set once and never change:
+Open your Components lesson page (/fundamentals/components) and notice that no matter what you do, the information never changes. This is because we're using **variables** that are set once and never change:
 
 ```jsx
 function ComponentsLesson() {
@@ -122,7 +124,7 @@ When state changes, React automatically updates the page to show the new informa
 Let's create a simple counter to see state in action. We'll add this to your **InteractivityLesson.jsx** page:
 
 ```jsx
-// Update your src/pages/week1/InteractivityLesson.jsx file
+// Update your src/pages/fundamentals/InteractivityLesson.jsx file
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -860,7 +862,7 @@ const [activeSection, setActiveSection] = useState("about");
 
 ## 🎯 Checkpoint Questions
 
-Before moving on to Day 5-6, make sure you can answer these:
+Before moving on to the next lesson, make sure you can answer these:
 
 1. **What is state and why do we need it?** (Memory that can change and triggers re-renders)
 2. **What's the difference between props and state?** (Props come from parent, state is owned by component)
@@ -963,7 +965,7 @@ const handleAddHobby = () => {
 
 ## What's Next?
 
-In Days 5-6, we'll build on today's state concepts to create more complex applications with:
+In the next lesson, we'll build on these state concepts to create more complex applications with:
 
 - **Dynamic lists** where you can add AND remove items
 - **Component communication** - sharing data between different components

@@ -1,10 +1,10 @@
-# Week 1, Day 1-2: Your First Steps into React
+# JavaScript Foundations & React Setup
 
-Welcome to programming! In these first two days, we'll learn the essential building blocks and set up your React Learning Hub - a special project where you'll build and showcase everything you learn. Think of this as learning to speak a new language - we'll start with the most important words first.
+Welcome to programming! In this lesson, we'll learn the essential building blocks and set up your React Learning Hub - a special project where you'll build and showcase everything you learn. Think of this as learning to speak a new language - we'll start with the most important words first.
 
 ## 🎯 What You'll Actually Build
 
-By the end of Day 2, you'll have:
+By the end of this lesson, you'll have:
 
 - **Your React Learning Hub** - a project that will grow with you as you learn
 - **Your first page** showing your personal information
@@ -332,7 +332,7 @@ my-dch-react-learning-hub/
 │   ├── main.jsx             ← This starts everything (don't touch)
 │   ├── pages/               ← Your lesson pages go here
 │   │   ├── Dashboard.jsx    ← Your learning hub homepage
-│   │   └── week1/           ← Week 1 lessons
+│   │   └── fundamentals/    ← React fundamentals lessons
 │   └── components/          ← Reusable UI components
 │       └── default/         ← Navigation and cards
 ├── index.html               ← The basic HTML page
@@ -340,6 +340,7 @@ my-dch-react-learning-hub/
 ```
 
 **The starter project includes:**
+
 - React Router for navigation between pages
 - A Dashboard component as your homepage
 - Pre-built navigation and lesson card components
@@ -363,10 +364,13 @@ function App() {
 	return (
 		<Router>
 			<div>
-				<Navigation />  {/* Navigation bar at the top */}
+				<Navigation /> {/* Navigation bar at the top */}
 				<Routes>
-					<Route path="/" element={<Dashboard />} />  {/* Hub for all lessons */}
-					<Route path="/week1/components" element={<ComponentsLesson />} />  {/* Your first lesson! */}
+					<Route path="/" element={<Dashboard />} /> {/* Hub for all lessons */}
+					<Route
+						path="/fundamentals/components"
+						element={<ComponentsLesson />}
+					/> {/* Your first lesson! */}
 				</Routes>
 			</div>
 		</Router>
@@ -374,19 +378,20 @@ function App() {
 }
 ```
 
-**What is this?** 
+**What is this?**
+
 - `Dashboard` = Your hub for navigating between all lessons
 - `ComponentsLesson` = Where you'll write your first React code!
 - The navigation happens automatically when you click lesson cards
 
 ### Step 2: Working on Your First Lesson Page
 
-Open `src/pages/week1/ComponentsLesson.jsx` - THIS is where we'll build today!
+Open `src/pages/fundamentals/ComponentsLesson.jsx` - THIS is where we'll build this lesson!
 
 You'll see it already has some starter code. Let's modify it to add your personal information:
 
 ```jsx
-// src/pages/week1/ComponentsLesson.jsx
+// src/pages/fundamentals/ComponentsLesson.jsx
 function ComponentsLesson() {
 	const myName = "Sarah"; // Put YOUR name here!
 
@@ -689,10 +694,10 @@ Before moving on, make sure you can answer these:
 
 ## What's Next?
 
-In Days 3-4, we'll dive into **React State & Interactivity**! You'll learn how to make your components come alive by adding:
+In the next lesson, we'll dive into **React State & Interactivity**! You'll learn how to make your components come alive by adding:
 
 - **Interactive counters** that respond to button clicks
-- **Show/hide sections** that toggle content visibility  
+- **Show/hide sections** that toggle content visibility
 - **Dynamic lists** where you can add new items
 - **Event handling** to respond to user actions
 - **Conditional rendering** to show different content based on state
