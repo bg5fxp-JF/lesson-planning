@@ -454,8 +454,8 @@ export function SecretComponent({ onLoginClick }: SecretComponentProps) {
 						<p className="text-lg mb-4">
 							This content was blurred until you logged in. This component
 							accessed your authentication status using{" "}
-							<code className="bg-white/20 px-2 py-1 rounded">useAuth()</code>- no
-							props passed from parent components!
+							<code className="bg-white/20 px-2 py-1 rounded">useAuth()</code>-
+							no props passed from parent components!
 						</p>
 						<div className="bg-white/20 p-4 rounded">
 							<p className="font-mono text-sm">
@@ -751,6 +751,7 @@ Focus on understanding context patterns through repetition.
 6. Create `useCart` custom hook with error handling
 
 **Hints:**
+
 - Use `reduce()` to calculate totalItems: `items.reduce((sum, item) => sum + item.quantity, 0)`
 - Pattern is identical to AuthContext, just different data
 
@@ -782,6 +783,7 @@ Focus on understanding context patterns through repetition.
 7. Create `useSettings` custom hook
 
 **Hints:**
+
 - `Partial<Settings>` means all properties are optional
 - Use spread operator to merge objects
 
@@ -815,6 +817,7 @@ Focus on understanding context patterns through repetition.
 6. Create `useNotifications` custom hook
 
 **Hints:**
+
 - Use `setTimeout(() => removeNotification(id), 3000)` for auto-dismiss
 - Filter: `setNotifications(prev => prev.filter(n => n.id !== id))`
 
@@ -850,10 +853,6 @@ interface AppContextType {
 **Answer:** All state in one context means components re-render when ANY value changes, even if they only use one piece. Split into separate contexts (AuthProvider, CartProvider, etc.).
 
 ---
-
-## What's Next?
-
-You've mastered Context API and built modular, maintainable components! Next lesson: **Forms & User Input with React 19** - you'll integrate forms with your new auth context!
 
 ## 🤖 AI Learning Tips
 
