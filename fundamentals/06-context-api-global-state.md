@@ -172,14 +172,10 @@ const auth = useContext(AuthContext);
 cd my-dch-react-learning-hub
 
 pnpm dlx shadcn@latest add dialog
-pnpm dlx shadcn@latest add form
 pnpm dlx shadcn@latest add input
 pnpm dlx shadcn@latest add label
 pnpm dlx shadcn@latest add avatar
 pnpm dlx shadcn@latest add badge
-
-# Form requires these peer dependencies
-pnpm add react-hook-form @hookform/resolvers zod
 ```
 
 ### Step 2: Create the Route First
@@ -480,15 +476,13 @@ export function SecretComponent({ onLoginClick }: SecretComponentProps) {
 
 ### Step 7: Create LoginDialog
 
-Modal with proper shadcn Form integration (Dependency Inversion - depends on abstractions).
+Simple login modal with manual form handling. You'll learn better approaches in Lesson 7!
 
 Create `src/components/context-demo/LoginDialog.tsx`:
 
 ```tsx
 // src/components/context-demo/LoginDialog.tsx
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
+import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import {
 	Dialog,
@@ -497,23 +491,9 @@ import {
 	DialogHeader,
 	DialogTitle,
 } from "@/components/ui/dialog";
-import {
-	Form,
-	FormControl,
-	FormField,
-	FormItem,
-	FormLabel,
-	FormMessage,
-} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-
-const loginSchema = z.object({
-	email: z.string().email("Please enter a valid email address"),
-	password: z.string().min(1, "Password is required"),
-});
-
-type LoginFormValues = z.infer<typeof loginSchema>;
+import { Label } from "@/components/ui/label";
 
 interface LoginDialogProps {
 	open: boolean;
@@ -523,21 +503,53 @@ interface LoginDialogProps {
 export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
 	const { login } = useAuth();
 
-	const form = useForm<LoginFormValues>({
-		resolver: zodResolver(loginSchema),
-		defaultValues: {
-			email: "",
-			password: "",
-		},
-	});
+	// Separate state for each field
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [errors, setErrors] = useState<{ email?: string; password?: string }>(
+		{}
+	);
+	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	const onSubmit = async (data: LoginFormValues) => {
+	// Manual validation function
+	const validateForm = (): boolean => {
+		const newErrors: { email?: string; password?: string } = {};
+
+		if (!email) {
+			newErrors.email = "Email is required";
+		} else if (!email.includes("@")) {
+			newErrors.email = "Please enter a valid email address";
+		}
+
+		if (!password) {
+			newErrors.password = "Password is required";
+		}
+
+		setErrors(newErrors);
+		return Object.keys(newErrors).length === 0;
+	};
+
+	const handleSubmit = async (e: React.FormEvent) => {
+		e.preventDefault();
+
+		// Validate before submitting
+		if (!validateForm()) {
+			return;
+		}
+
+		setIsSubmitting(true);
+
 		try {
-			await login(data.email, data.password);
+			await login(email, password);
+			// Reset form on success
+			setEmail("");
+			setPassword("");
+			setErrors({});
 			onOpenChange(false);
-			form.reset();
 		} catch (error) {
 			console.error("Login failed:", error);
+		} finally {
+			setIsSubmitting(false);
 		}
 	};
 
@@ -551,53 +563,39 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
 					</DialogDescription>
 				</DialogHeader>
 
-				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-						<FormField
-							control={form.control}
-							name="email"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Email</FormLabel>
-									<FormControl>
-										<Input
-											type="email"
-											placeholder="you@example.com"
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
+				<form onSubmit={handleSubmit} className="space-y-4">
+					<div className="space-y-2">
+						<Label htmlFor="email">Email</Label>
+						<Input
+							id="email"
+							type="email"
+							placeholder="you@example.com"
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
 						/>
+						{errors.email && (
+							<p className="text-sm text-destructive">{errors.email}</p>
+						)}
+					</div>
 
-						<FormField
-							control={form.control}
-							name="password"
-							render={({ field }) => (
-								<FormItem>
-									<FormLabel>Password</FormLabel>
-									<FormControl>
-										<Input
-											type="password"
-											placeholder="Enter any password"
-											{...field}
-										/>
-									</FormControl>
-									<FormMessage />
-								</FormItem>
-							)}
+					<div className="space-y-2">
+						<Label htmlFor="password">Password</Label>
+						<Input
+							id="password"
+							type="password"
+							placeholder="Enter any password"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)}
 						/>
+						{errors.password && (
+							<p className="text-sm text-destructive">{errors.password}</p>
+						)}
+					</div>
 
-						<Button
-							type="submit"
-							className="w-full"
-							disabled={form.formState.isSubmitting}
-						>
-							{form.formState.isSubmitting ? "Logging in..." : "Log In"}
-						</Button>
-					</form>
-				</Form>
+					<Button type="submit" className="w-full" disabled={isSubmitting}>
+						{isSubmitting ? "Logging in..." : "Log In"}
+					</Button>
+				</form>
 			</DialogContent>
 		</Dialog>
 	);
